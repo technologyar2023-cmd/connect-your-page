@@ -127,23 +127,29 @@
   <p class="security">🔒 Facebook يتحقق من هويتك — نحن لا نرى كلمة مرورك</p>
 </div>
  
-<!-- Facebook JS SDK -->
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ar_AR/sdk.js"></script>
- 
 <script>
   const APP_ID   = '3164834813697895';
   const N8N_HOOK = 'https://yacinee3.app.n8n.cloud/webhook/fb-oauth';
   const SCOPE    = 'pages_messaging,pages_manage_metadata,pages_read_engagement,pages_show_list';
  
-  // تهيئة Facebook SDK
   window.fbAsyncInit = function() {
     FB.init({
-      appId:   APP_ID,
-      cookie:  true,
-      xfbml:   true,
+      appId  : APP_ID,
+      cookie : true,
+      xfbml  : true,
       version: 'v25.0'
     });
+ 
+    FB.AppEvents.logPageView();
   };
+ 
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
  
   function setStatus(type, msg) {
     const el = document.getElementById('status');

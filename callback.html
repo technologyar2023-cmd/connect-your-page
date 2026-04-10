@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>جاري الربط...</title>
+<style>
+  body {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: #f0f2f5;
+  }
+  .box {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e0e0e0;
+    border-top-color: #1877F2;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  p { color: #65676b; margin: 0; font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="spinner"></div>
+  <p>جاري ربط صفحتك...</p>
+</div>
+
+<script>
+  // استخرج الـ code من URL
+  const params = new URLSearchParams(window.location.search);
+  const code   = params.get('code');
+  const error  = params.get('error');
+
+  if (error) {
+    document.querySelector('p').textContent = 'تم إلغاء العملية';
+  } else if (code) {
+    // أرسل الـ code لـ n8n
+    const n8nUrl = 'https://yacinee3.app.n8n.cloud/webhook/fb-callback?code=' + encodeURIComponent(code);
+    fetch(n8nUrl)
+      .then(res => res.text())
+      .then(() => {
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('p').textContent = '✅ تم ربط الصفحة بنجاح!';
+      })
+      .catch(() => {
+        document.querySelector('p').textContent = '❌ حدث خطأ، حاول مجدداً';
+      });
+  }
+</script>
+</body>
+</html>

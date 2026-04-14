@@ -4,134 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ربط صفحة Facebook</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
-  :root {
-    --blue: #1877F2;
-    --blue-dark: #0f5ecb;
-    --bg: #f0f2f5;
-    --white: #ffffff;
-    --text: #1c1e21;
-    --muted: #65676b;
-    --border: #dadde1;
-    --green: #16a34a;
-    --red: #dc2626;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: var(--bg);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .card {
-    background: var(--white);
-    border-radius: 20px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
-    padding: 48px 40px;
-    max-width: 480px;
-    width: 100%;
-    text-align: center;
-  }
-  .logo {
-    width: 64px; height: 64px;
-    background: var(--blue);
-    border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 32px;
-  }
-  h1 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .subtitle { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: 32px; }
-  .steps {
-    background: #f8f9fa; border-radius: 12px;
-    padding: 20px 24px; margin-bottom: 32px; text-align: right;
-  }
-  .step {
-    display: flex; align-items: center; gap: 12px;
-    padding: 8px 0; font-size: 14px; color: var(--text);
-  }
-  .step:not(:last-child) { border-bottom: 1px solid var(--border); }
-  .step-num {
-    width: 28px; height: 28px; background: var(--blue); color: white;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; flex-shrink: 0;
-  }
-  .btn-connect {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; padding: 16px 24px;
-    background: var(--blue); color: white; border: none; border-radius: 12px;
-    font-family: 'Cairo', sans-serif; font-size: 17px; font-weight: 700;
-    cursor: pointer; transition: background 0.2s, transform 0.1s;
-  }
-  .btn-connect:hover  { background: var(--blue-dark); }
-  .btn-connect:active { transform: scale(0.98); }
-  .btn-connect:disabled { background: #9ca3af; cursor: not-allowed; }
-  .btn-connect svg { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
-  .security {
-    margin-top: 20px; font-size: 13px; color: var(--muted);
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-  }
-  #status {
-    margin-top: 20px; padding: 14px; border-radius: 10px;
-    font-size: 14px; font-weight: 600; display: none;
-  }
-  #status.success { background: #f0fdf4; color: var(--green); display: block; }
-  #status.error   { background: #fef2f2; color: var(--red);   display: block; }
-  #status.loading { background: #eff6ff; color: var(--blue);  display: block; }
-  .spinner {
-    display: inline-block; width: 16px; height: 16px;
-    border: 2px solid #bfdbfe; border-top-color: var(--blue);
-    border-radius: 50%; animation: spin 0.7s linear infinite;
-    vertical-align: middle; margin-left: 6px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-</style>
 </head>
+
 <body>
- 
-<div class="card">
-  <div class="logo">🤖</div>
-  <h1>ربط صفحة Facebook</h1>
-  <p class="subtitle">
-    اربط صفحتك التجارية في ثوانٍ<br>
-    دون مشاركة أي كلمة مرور أو بيانات شخصية
-  </p>
- 
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <span>اضغط الزر أدناه — ستفتح نافذة Facebook رسمية</span>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <span>اختر الصفحة التي تريد ربطها</span>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <span>اضغط موافق — يتم الربط تلقائياً ✅</span>
-    </div>
-  </div>
- 
-  <button class="btn-connect" id="connectBtn" onclick="connectFacebook()">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-    </svg>
-    ربط صفحة Facebook
-  </button>
- 
-  <div id="status"></div>
-  <p class="security">🔒 Facebook يتحقق من هويتك — نحن لا نرى كلمة مرورك</p>
-</div>
- 
+
+<button onclick="connectFacebook()">ربط صفحة Facebook</button>
+<div id="status"></div>
+
 <script>
   const APP_ID   = '3164834813697895';
   const N8N_HOOK = 'https://yacinee3.app.n8n.cloud/webhook/fb-oauth';
   const SCOPE    = 'pages_messaging,pages_manage_metadata,pages_read_engagement,pages_show_list';
- 
+
   window.fbAsyncInit = function() {
     FB.init({
       appId  : APP_ID,
@@ -139,79 +23,81 @@
       xfbml  : true,
       version: 'v25.0'
     });
- 
-    FB.AppEvents.logPageView();
   };
- 
+
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
+    if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = "https://connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
- 
-  function setStatus(type, msg) {
-    const el = document.getElementById('status');
-    el.className = type;
-    el.innerHTML = msg;
+
+  function setStatus(msg) {
+    document.getElementById('status').innerText = msg;
   }
- 
+
   function connectFacebook() {
-    const btn = document.getElementById('connectBtn');
-    btn.disabled = true;
-    setStatus('loading', 'جاري الاتصال بـ Facebook... <span class="spinner"></span>');
- 
+    setStatus('جاري الاتصال...');
+
     FB.login(function(response) {
+      console.log('LOGIN RESPONSE:', response);
+
       if (response.authResponse) {
         const userToken = response.authResponse.accessToken;
-        setStatus('loading', 'جاري جلب معلومات الصفحة... <span class="spinner"></span>');
- 
-        // جلب قائمة الصفحات مع Page Access Tokens
-        FB.api('/me/accounts', { access_token: userToken, fields: 'id,name,access_token,category' }, function(pages) {
+
+        setStatus('جاري جلب الصفحات...');
+
+        FB.api('/me/accounts', {
+          access_token: userToken,
+          fields: 'id,name,access_token,category'
+        }, function(pages) {
+
+          console.log('PAGES:', pages);
+
           if (!pages || pages.error || !pages.data || pages.data.length === 0) {
-            setStatus('error', '❌ لم يتم العثور على صفحات — تأكد أنك Admin للصفحة');
-            btn.disabled = false;
+            setStatus('❌ لم يتم العثور على صفحات');
             return;
           }
- 
+
           const page = pages.data[0];
-          setStatus('loading', 'جاري حفظ البيانات... <span class="spinner"></span>');
- 
-          // إرسال Page Token لـ n8n
+
+          setStatus('جاري الإرسال إلى n8n...');
+
           fetch(N8N_HOOK, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              page_id:      page.id,
-              page_name:    page.name,
-              page_token:   page.access_token,
+              page_id: page.id,
+              page_name: page.name,
+              page_token: page.access_token,
               page_category: page.category,
               connected_at: new Date().toISOString()
             })
           })
-          .then(res => {
-            if (res.ok) {
-              setStatus('success', '✅ تم ربط صفحة "' + page.name + '" بنجاح!');
-              btn.style.display = 'none';
-            } else {
-              throw new Error('n8n error');
-            }
+          .then(res => res.json())
+          .then(data => {
+            console.log('N8N RESPONSE:', data);
+            setStatus('✅ تم الربط بنجاح: ' + page.name);
           })
-          .catch(() => {
-            // حتى لو فشل الإرسال لـ n8n، البيانات موجودة
-            setStatus('success', '✅ تم ربط صفحة "' + page.name + '" بنجاح!');
-            btn.style.display = 'none';
+          .catch(err => {
+            console.error(err);
+            setStatus('⚠️ تم الربط لكن فشل الإرسال لـ n8n');
           });
+
         });
- 
+
       } else {
-        setStatus('error', '❌ تم إلغاء العملية أو لم يتم منح الصلاحيات');
-        btn.disabled = false;
+        setStatus('❌ تم إلغاء تسجيل الدخول');
       }
-    }, { scope: SCOPE });
+
+    }, {
+      scope: SCOPE,
+      auth_type: 'rerequest',
+      return_scopes: true
+    });
   }
 </script>
- 
+
 </body>
 </html>
